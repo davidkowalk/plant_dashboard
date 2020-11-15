@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>[title]</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300&display=swap" rel="stylesheet">
+    <style media="screen">
+
+      html {
+        background-color: rgb(40,44,52);
+        color: white;
+        text-align: center;
+        height: 100%;
+
+        font-family: 'Raleway', sans-serif;
+      }
+
+      body {
+        height: 100%;
+        width: 100%;
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+      }
+
+      table {
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        height: auto;
+      }
+
+      td {
+        border: 3px;
+        border-style: solid;
+        border-color: rgb(56, 62, 73);
+        width: 19%;
+        height: 190px;
+      }
+
+      .grid-container {
+        display: grid;
+        grid-template-columns: 0.2fr 3fr 0.2fr;
+        grid-template-rows: 0.2fr 3fr;
+        gap: 3px 3px;
+        grid-template-areas:
+        "l-shoulder Header Header"
+        "l-shoulder Content Content";
+
+        height: 100%;
+        width: 100%;
+      }
+
+      .Header {
+        grid-area: Header;
+        background-color: rgb(56, 62, 73);
+      }
+
+      .r-shoulder {
+        grid-area: r-shoulder;
+      }
+
+      .l-shoulder {
+        grid-area: l-shoulder;
+        background-color: rgb(33, 36, 43);
+
+        display:grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr 4fr 1fr;
+        grid-template-areas:
+        "head"
+        "calendar"
+        "homework"
+        "cloud"
+        "filler"
+        "info";
+      }
+
+      .Content {
+        grid-area: Content;
+      }
+
+      /*Icons*/
+      .menu-icon {
+        /*margin-left: 30%;*/
+        margin-right: 0%;
+        margin-top: 33%;
+
+        width: 35%;
+        /*height: 100%;*/
+      }
+
+      /*Canvas*/
+
+      .Content {
+        width: 90%;
+      }
+
+      #graph_canvas {
+        width: 80%;
+        height: 80%;
+        margin-top: 3%;
+        margin-left: 6%;
+      }
+
+    </style>
+  </head>
+  <body>
+    <script>
+
+    function highlight(id) {
+      document.getElementById(id).style.backgroundColor = "rgb(43, 46, 51)";
+    }
+
+    function rm_highlight(id) {
+      document.getElementById(id).style.backgroundColor = null;
+    }
+
+    function redirect(site) {
+      window.location = site;
+    }
+
+    </script>
+    <div class="grid-container">
+      <!--Menu Icons-->
+      <div class="Header"></div>
+      <div class="l-shoulder" height="100px">
+
+        <div style="cursor: pointer" onclick="redirect('index.html')" onmouseover="highlight('icon_container_1')" onmouseout="rm_highlight('icon_container_1')" id="icon_container_1" class="icon_container">
+          <svg viewBox="0 0 16 16" class="bi bi-bar-chart-line menu-icon" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2zm1 12h2V2h-2v12zm-3 0V7H7v7h2zm-5 0v-3H2v3h2z"/>
+          </svg>
+        </div>
+
+
+        <div style="color: gray" onmouseover="highlight('icon_container_2')" onmouseout="rm_highlight('icon_container_2')" id="icon_container_2" class="icon_container">
+          <svg viewBox="0 0 16 16" class="bi bi-battery-half menu-icon" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M12 5H2a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1zM2 4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H2z"/>
+            <path d="M2 6h5v4H2V6zm12.5 3.5a1.5 1.5 0 0 0 0-3v3z"/>
+          </svg>
+        </div>
+
+        <div style="color: gray" onmouseover="highlight('icon_container_3')" onmouseout="rm_highlight('icon_container_3')" id="icon_container_3" class="icon_container">
+          <svg viewBox="0 0 16 16" class="bi bi-droplet menu-icon" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M7.21.8C7.69.295 8 0 8 0c.109.363.234.708.371 1.038.812 1.946 2.073 3.35 3.197 4.6C12.878 7.096 14 8.345 14 10a6 6 0 0 1-12 0C2 6.668 5.58 2.517 7.21.8zm.413 1.021A31.25 31.25 0 0 0 5.794 3.99c-.726.95-1.436 2.008-1.96 3.07C3.304 8.133 3 9.138 3 10a5 5 0 0 0 10 0c0-1.201-.796-2.157-2.181-3.7l-.03-.032C9.75 5.11 8.5 3.72 7.623 1.82z"/>
+            <path fill-rule="evenodd" d="M4.553 7.776c.82-1.641 1.717-2.753 2.093-3.13l.708.708c-.29.29-1.128 1.311-1.907 2.87l-.894-.448z"/>
+          </svg>
+        </div>
+
+        <div class="filler"></div>
+
+      </div>
+      <div class="Content">
+
+        <!--style="background-color: white"-->
+        <canvas id="graph_canvas"></canvas>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+        <script>
+
+          const grid_color = "rgb(86, 95, 112)";
+          const text_color = "rgb(162, 180, 211)";
+
+          var ctx = document.getElementById('graph_canvas').getContext('2d');
+          var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: ['12:00', '13:00', '14:00', '15:00', '16:00', '17:00'],
+              datasets: [{
+                label: 'Soil Humidity',
+                data: [0.6, 0.55, 0.45, 0.4, 0.7, 0.66],
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+              }]
+            },
+            options: {
+              legend: {
+                labels: {
+                  fontColor: text_color,
+                  fontSize: 15
+                }
+              },
+              scales: {
+                yAxes: [{
+                  gridLines: {
+                    color: grid_color
+                  },
+                  ticks: {
+                    fontColor: text_color,
+                    min: 0,
+                    max: 1
+                  }
+                }],
+
+                xAxes: [{
+                  ticks: {
+                    fontColor: text_color,
+                  },
+                  gridLines: {
+                    color: grid_color
+                  }
+                }]
+              }
+            }
+          });
+
+        </script>
+
+      </div>
+    </div>
+  </body>
+</html>
