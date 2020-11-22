@@ -31,15 +31,7 @@ def check_overlap(list1, list2, overlap):
 
     return True
 
-def add_data():
-    root = Tk()
-    root.withdraw()
-
-    path = filedialog.askopenfilename()
-
-    if path == "":
-        print("No File")
-        return
+def add_data(path):
 
     with open(path, "r") as f:
         txt = f.read()
@@ -62,12 +54,35 @@ def add_data():
 
     new = response.json()
 
+    # Find beginning of data
+    start = 0
+    for i in range(len(new)):
+        start = i
+
+        if new[i] != 0:
+            break
+
+    new = new[start:]
+
+    # Stich old and new data together
     stiched = stich(old, new)
 
     # Save Data
 
     with open(path, "w") as f:
         json.dump(stiched, f, indent=2)
+
+def main():
+
+    root = Tk()
+    root.withdraw()
+    path = filedialog.askopenfilename()
+
+    if path == "":
+        print("No File")
+        return
+
+    add_data(path)
 
 if __name__ == '__main__':
     add_data()
