@@ -1,6 +1,9 @@
+from tkinter import filedialog, Tk
+import requests, json
+
 def stich(original: list, new_list: list):
 
-    max_overlap = (len(list1) > len(list2)) * len(list2) + (len(list2) > len(list1)) * len(list1)
+    max_overlap = (len(original) > len(new_list)) * len(new_list) + (len(new_list) > len(original)) * len(original)
 
     overlap = get_overlap(original, new_list, max_overlap)
 
@@ -27,3 +30,44 @@ def check_overlap(list1, list2, overlap):
             return False
 
     return True
+
+def add_data():
+    root = Tk()
+    root.withdraw()
+
+    path = filedialog.askopenfilename()
+
+    if path == "":
+        print("No File")
+        return
+
+    with open(path, "r") as f:
+        txt = f.read()
+
+    try:
+        old = json.loads(txt)
+    except:
+        print("Failed to read json.")
+        print(txt)
+        return
+
+    # Get New Data
+    ip = "http://192.168.178.64/data"
+    response = requests.get(ip)
+
+    if response.status_code != 200:
+        print(f"Connection Failed! ({response.status_code})")
+        print(response.headers)
+        return
+
+    new = response.json()
+
+    stiched = stich(old, new)
+
+    # Save Data
+
+    with open(path, "w") as f:
+        json.dump(stiched, f, indent=2)
+
+if __name__ == '__main__':
+    add_data()
