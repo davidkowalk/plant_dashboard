@@ -141,6 +141,11 @@ void loop() {
   Serial.println(sensor_value);
   push_value(float(sensor_value)/2047.0);
 
+  if( WiFi.status() != WL_CONNECTED ){
+    //Try to recconect if connection is lost....
+    WiFi.disconnect();
+    WiFi.begin(ssid, pwd);
+  }
   
   delay(second_delay*1000);
 }
